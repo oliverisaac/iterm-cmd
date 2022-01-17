@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+EDITOR="${EDITOR:-vim}"
+
+function handle_click(){
+    file="$1"
+    line_number="${2:-}"
+
+    itermRegex='^/tmp/iterm2-cmd/([a-f0-9A-F]+)$'
+    if [[ "$file" =~ $itermRegex ]]; then
+        cat "$file"
+        echo
+    elif [[ -f "$file" ]]; then
+        args=( "${EDITOR}" )
+
+        # Set the line number
+        if [[ -n "$line_nubmer" ]]; then
+            if [[ ${EDITOR} == vim ]] || [[ $EDITOR == vi ]]; then
+                args=( +${line_number} )
+            elif [[ ${EDITOR} == code ]]; then # visual studio code
+                args=( -g "$file:${line_number}" )
+            fi
+        fi
+        printf "%q " "${args[@]}"
+        echo
+    else
+        printf 'echo "< $PWD ^ $( dirname %q )"; cd %q; ls;\n' "$file" "$file"
+    fi
+}
+
+handle_click "${@}"
