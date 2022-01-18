@@ -10,7 +10,7 @@ function handle_click(){
     line_number="${2:-}"
 
     itermRegex="^${ITERM2_CMD_DIR%/}/([a-f0-9A-F]+)$"
-    if [[ ${ITERM2_CMD_ENABLED:-false} == true ]] && [[ "$file" =~ $itermRegex ]]; then
+    if [[ "$file" =~ $itermRegex ]]; then
         cat "$file"
         echo
     elif [[ -f "$file" ]]; then
@@ -24,6 +24,7 @@ function handle_click(){
                 args=( -g "$file:${line_number}" )
             fi
         fi
+        args+=( "$file" )
         printf "%q " "${args[@]}"
         echo
     else
