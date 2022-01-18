@@ -3,13 +3,14 @@
 set -euo pipefail
 
 EDITOR="${EDITOR:-vim}"
+ITERM2_CMD_DIR="${ITERM2_CMD_DIR:-/tmp/it2cmd}"
 
 function handle_click(){
     file="$1"
     line_number="${2:-}"
 
-    itermRegex='^/tmp/iterm2-cmd/([a-f0-9A-F]+)$'
-    if [[ "$file" =~ $itermRegex ]]; then
+    itermRegex="^${ITERM2_CMD_DIR%/}/([a-f0-9A-F]+)$"
+    if [[ ${ITERM2_CMD_ENABLED:-false} == true ]] && [[ "$file" =~ $itermRegex ]]; then
         cat "$file"
         echo
     elif [[ -f "$file" ]]; then
