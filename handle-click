@@ -17,7 +17,7 @@ function handle_click(){
         args=( "${EDITOR}" )
 
         # Set the line number
-        if [[ -n "$line_nubmer" ]]; then
+        if [[ -n "$line_number" ]]; then
             if [[ ${EDITOR} == vim ]] || [[ $EDITOR == vi ]]; then
                 args=( +${line_number} )
             elif [[ ${EDITOR} == code ]]; then # visual studio code
