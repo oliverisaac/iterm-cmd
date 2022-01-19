@@ -7,9 +7,25 @@ This repo has a tool which does two things:
 
 # Configuration
 
-The only configuration option is `ITERM2_CMD_DIR` which sets where the files are created. This defaults to `${TMPDIR}/it2cmd` but can be set to any directory.
+### `ITERM_CMD_DIR`
 
-**I would suggest setting `ITERM2_CMD_DIR=/tmp/it2cmd`**
+Sets where the files are created. This defaults to `${TMPDIR}/it2cmd` but can be set to any directory.
+**I would suggest setting `ITERM_CMD_DIR=/tmp/it2cmd`**
+
+### `ITERM_CMD_LS_AFTER_CD`
+
+The iterm-cmd click handler will, by default, execute an `ls` after you click on a directory. Set this to `false` to disable.
+
+### `ITERM_CMD_PRINT_EASY_NAV`
+
+The iterm-cmd click handler will, by default, print out a click-map for you to quickly navigate. Something like:
+
+```
+< /path/to/previous/location ^ /path/to/parent/directory
+```
+
+Set this to `false` to disable
+
 
 # Installation
 
@@ -28,11 +44,11 @@ cd "$GOPATH"/src/github.com/oliverisaac/iterm-cmd
 go install .
 ```
 
-### 3. Edit your iTerm2 Settings to use the handle-click script:
+### 3. Edit your iTerm2 Settings to use the click handling functionality:
 
-1. Get the path to the `handle-click` script: 
+1. Get the path to the `iterm-cmd` command 
 ```bash
-echo "$GOPATH"/src/github.com/oliverisaac/iterm-cmd/handle-click
+which iterm-cmd
 ```
 
 2. In iTerm2, go to the application preferences (`cmd` + `comma`)
@@ -41,17 +57,17 @@ echo "$GOPATH"/src/github.com/oliverisaac/iterm-cmd/handle-click
 
 4. Under "Semantic History" select "Run Coprocess..."
 
-5. In the text box that appears, paste in the path to the `handle-click` script and add: `'\1' '\2'` at the end. It should look something like: 
+5. In the text box that appears, paste in the path to the command and add: `handle '\1' '\2'` at the end. It should look something like: 
 ```
-/Users/example/go/src/github.com/oliverisaac/iterm-cmd/handle-click '\1' '\2'
-```
-
-6. If you are using a custom `ITERM2_CMD_DIR` then you will want to prefix the command with that definition. You will end up with something like
-```
-ITERM2_CMD_DIR=/tmp/it2cmd $HOME/go/src/github.com/oliverisaac/iterm-cmd/handle-click '\1' '\2'
+/opt/homebrew/bin/iterm-cmd handle '\1' '\2'
 ```
 
-### 4. Use the script
+6. If you are using a custom `ITERM_CMD_DIR` then you will want to prefix the command with that definition. You will end up with something like
+```
+ITERM_CMD_DIR=/tmp/it2cmd /opt/homebrew/bin/iterm-cmd handle '\1' '\2'
+```
+
+### 4. Use the click handler
 
 You can now use `iterm-cmd` to generate a file which contains a command that iTerm2 can then execute. For example, run:
 
