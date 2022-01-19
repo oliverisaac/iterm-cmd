@@ -1,3 +1,4 @@
+
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
 before:
@@ -26,6 +27,15 @@ checksum:
 
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
+
+# From: https://medium.com/@ben.lafferty/deploying-go-cli-applications-316e9cca16a4
+brews:
+  - github:
+        owner: oliverisaac
+        name: homebrew-tap
+    folder: Formula
+    homepage: https://github.com/oliverisaac/iterm-cmd
+    description: Generate files that contain commands and be cmd-clicked inside iTerm2
 
 changelog:
   sort: asc
