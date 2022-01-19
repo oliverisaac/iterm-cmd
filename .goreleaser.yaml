@@ -30,7 +30,7 @@ snapshot:
 
 # From: https://medium.com/@ben.lafferty/deploying-go-cli-applications-316e9cca16a4
 brews:
-  - github:
+  - tap:
         owner: oliverisaac
         name: homebrew-tap
     folder: Formula
