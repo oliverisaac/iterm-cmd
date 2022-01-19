@@ -14,6 +14,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+var version string = "unset-version"
+var commit string = "unset-commit"
+
 func main() {
 	workDir := path.Join(os.TempDir(), "it2cmd")
 	if dir, isSet := os.LookupEnv("ITERM_CMD_DIR"); isSet {
@@ -37,6 +40,9 @@ func main() {
 	var err error
 	if strings.EqualFold(firstArg, "handle") {
 		err = handleClick(workDir)
+	} else if strings.EqualFold(firstArg, "version") {
+		fmt.Printf("iterm-cmd version: %s (%s)\n", version, commit)
+		return
 	} else {
 		err = handleCreate(workDir)
 	}
