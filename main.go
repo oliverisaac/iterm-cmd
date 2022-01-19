@@ -87,6 +87,9 @@ func handleClick(workDir string) error {
 		defer src.Close()
 
 		io.Copy(os.Stdout, src)
+		if lookupBoolEnv("ITERM_CMD_RUN_ON_CLICK", true) {
+			fmt.Printf("\n")
+		}
 		return nil
 	} else if isDir {
 		logrus.Trace("fileArg is a directory, going to CD to it")

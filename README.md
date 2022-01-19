@@ -65,6 +65,8 @@ Then `cmd-click` on the output filename.
 
 # Configuration
 
+You will need to set these configuration items in the `command to run` textbox of iTerm2's preferences.
+
 
 ### `ITERM_CMD_DIR`
 
@@ -101,3 +103,7 @@ kubectl get pods -o name | while read podname; do
     echo "$output"
 done
 ```
+
+### `ITERM_CMD_RUN_ON_CLICK`
+
+This will cause iterm-cmd to send a newline character after reading the command file. It does not guarantee that a command will not run. But helps it along if the command does not contain the trailing newline
