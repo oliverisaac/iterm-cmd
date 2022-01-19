@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	workDir := path.Join(os.TempDir(), "iT2cmd")
+	workDir := path.Join(os.TempDir(), "it2cmd")
 
 	if dir, isSet := os.LookupEnv("ITERM2_CMD_DIR"); isSet {
 		workDir = dir

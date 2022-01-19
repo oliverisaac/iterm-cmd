@@ -3,7 +3,7 @@
 set -euo pipefail
 
 EDITOR="${EDITOR:-vim}"
-ITERM2_CMD_DIR="${ITERM2_CMD_DIR:-/tmp/it2cmd}"
+ITERM2_CMD_DIR="${ITERM2_CMD_DIR:-${TMPDIR}/it2cmd}"
 
 function handle_click(){
     file="$1"
