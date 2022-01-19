@@ -7,14 +7,17 @@ This repo has a tool which does two things:
 
 # Configuration
 
+
 ### `ITERM_CMD_DIR`
 
 Sets where the files are created. This defaults to `${TMPDIR}/it2cmd` but can be set to any directory.
 **I would suggest setting `ITERM_CMD_DIR=/tmp/it2cmd`**
 
+
 ### `ITERM_CMD_LS_AFTER_CD`
 
 The iterm-cmd click handler will, by default, execute an `ls` after you click on a directory. Set this to `false` to disable.
+
 
 ### `ITERM_CMD_PRINT_EASY_NAV`
 
@@ -26,6 +29,20 @@ The iterm-cmd click handler will, by default, print out a click-map for you to q
 
 Set this to `false` to disable
 
+
+### `ITERM_CMD_ENABLED`
+
+This is not a direct configuration option, but this is the environment variable you should use in a script to tell if a user would like to print out iterm-cmd paths. Something like this:
+
+```bash
+kubectl get pods -o name | while read podname; do 
+    output="$podname"
+    if [[ ${ITERM_CMD_ENABLED:-false} == true ]]; then
+        output="$podname $( iterm-cmd kubectl get pod $podname -o yaml )"
+    fi
+    echo "$output"
+done
+```
 
 # Installation
 
@@ -49,6 +66,12 @@ go install .
 1. Get the path to the `iterm-cmd` command 
 ```bash
 which iterm-cmd
+```
+
+or you can generate the full command you'll need:
+
+```bash
+echo "${ITERM_CMD_DIR:+ITERM_CMD_DIR='${ITERM_CMD_DIR}' }'$( which iterm-cmd )' handle '\1' '\2'"
 ```
 
 2. In iTerm2, go to the application preferences (`cmd` + `comma`)

@@ -57,9 +57,12 @@ func handleClick(workDir string) error {
 	var lineNumber int
 	var err error
 	if len(os.Args) > 3 {
-		lineNumber, err = strconv.Atoi(os.Args[3])
-		if err != nil {
-			return errors.Wrap(err, "Second argument should be line number")
+		lineNumberString := os.Args[3]
+		if lineNumberString != "" {
+			lineNumber, err = strconv.Atoi(os.Args[3])
+			if err != nil {
+				return errors.Wrap(err, "Second argument should be line number")
+			}
 		}
 	}
 
