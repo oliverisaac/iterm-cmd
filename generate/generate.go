@@ -7,9 +7,10 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strings"
 
-	"github.com/alessio/shellescape"
 	"github.com/oliverisaac/go-levellogger"
+	"github.com/oliverisaac/shellescape"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
@@ -63,7 +64,8 @@ func (cg *CommandGenerator) CommandFile(exe string, args ...string) (string, err
 		return "", errors.Wrap(err, "Ensuring directory exists")
 	}
 
-	quoted := shellescape.QuoteCommand(fullCommand)
+	quotedCommand := shellescape.EscapeArgs(fullCommand)
+	quoted := strings.Join(quotedCommand, " ")
 	log.Tracef("Quoted command is: %s", quoted)
 
 	commandHash := hashString(quoted)

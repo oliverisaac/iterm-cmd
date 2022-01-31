@@ -3,8 +3,8 @@ module github.com/oliverisaac/iterm-cmd
 go 1.17
 
 require (
-	github.com/alessio/shellescape v1.4.1
 	github.com/oliverisaac/go-levellogger v0.0.0-20220117234708-446cdefd77ab
+	github.com/oliverisaac/shellescape v0.0.0-20220131224704-1b6c6b87b668
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 )
