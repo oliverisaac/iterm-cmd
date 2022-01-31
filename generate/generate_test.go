@@ -38,7 +38,7 @@ func TestCommandGenerator_CommandFile(t *testing.T) {
 				"-c",
 				"sleep 1",
 			},
-			wantOutputFile: workDir + "/6",
+			wantOutputFile: workDir + "/7",
 			wantErr:        false,
 		},
 		{
@@ -51,7 +51,7 @@ func TestCommandGenerator_CommandFile(t *testing.T) {
 				"-c",
 				"sleep 1",
 			},
-			wantOutputFile: workDir + "/6",
+			wantOutputFile: workDir + "/7",
 			wantErr:        false,
 		},
 		{
@@ -62,9 +62,9 @@ func TestCommandGenerator_CommandFile(t *testing.T) {
 			args: []string{
 				"/bin/bash",
 				"-c",
-				"sleep 17", // Found this value of sleep 17 through trial and error
+				"sleep 13011", // Found this value of sleep 17 through trial and error
 			},
-			wantOutputFile: workDir + "/61",
+			wantOutputFile: workDir + "/7c",
 			wantErr:        false,
 		},
 		{
@@ -93,7 +93,7 @@ func TestCommandGenerator_CommandFile(t *testing.T) {
 				return
 			}
 			if gotOutputFile != tt.wantOutputFile {
-				t.Errorf("\ngot = %v\n want %v", gotOutputFile, tt.wantOutputFile)
+				t.Errorf("\n got:  %v\n want: %v", gotOutputFile, tt.wantOutputFile)
 			}
 		})
 	}
