@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/oliverisaac/iterm-cmd/generate"
+	"github.com/oliverisaac/shellescape"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
@@ -96,11 +97,11 @@ func handleClick(workDir string) error {
 		cmd := []string{}
 
 		if lookupBoolEnv("ITERM_CMD_PRINT_EASY_NAV", true) {
-			easyNav := fmt.Sprintf(`echo "< $PWD ^ $( dirname %q )"`, pathArg)
+			easyNav := fmt.Sprintf(`echo "< $PWD ^ $( dirname %s )"`, shellescape.Escape(pathArg))
 			cmd = append(cmd, easyNav)
 		}
 
-		cmd = append(cmd, fmt.Sprintf("cd %q", pathArg))
+		cmd = append(cmd, fmt.Sprintf("cd %s", shellescape.Escape(pathArg)))
 
 		if lookupBoolEnv("ITERM_CMD_LS_AFTER_CD", true) {
 			cmd = append(cmd, "ls")
@@ -127,10 +128,7 @@ func handleClick(workDir string) error {
 		}
 
 		cmd = append(cmd, pathArg)
-		for _, a := range cmd {
-			fmt.Printf("%q ", a)
-		}
-		fmt.Printf("\n")
+		fmt.Println(strings.Join(shellescape.EscapeArgs(cmd), " "))
 	}
 
 	return nil
