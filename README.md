@@ -8,20 +8,16 @@ This repo has a tool which does two things:
 
 # Installation
 
-### 1. Clone the Repo
-Clone this repo into an appropriate directory:
-
-```
-mkdir -p "$GOPATH"/src/github.com/oliverisaac/iterm-cmd
-git clone git@github.com:oliverisaac/iterm-cmd.git "$GOPATH"/src/github.com/oliverisaac/iterm-cmd
-```
-
-### 2. Build and install `iterm-cmd`
-
+### 1. Install iterm-cmd
 ```
 brew tap oliverisaac/tap
 brew install oliverisaac/tap/iterm-cmd
 ```
+
+### 2. Set up configuration
+
+Edit your environment to configure how `iterm-cmd` behaves. Configuration options are below.
+
 
 ### 3. Edit your iTerm2 Settings to use the click handling functionality:
 
