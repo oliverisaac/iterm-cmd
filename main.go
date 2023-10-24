@@ -123,7 +123,7 @@ func handleClick(workDir string) error {
 			if strings.HasSuffix(editor, "vim") {
 				cmd = append(cmd, fmt.Sprintf("+%d", lineNumber))
 			} else if strings.HasSuffix(editor, "code") {
-				cmd = append(cmd, fmt.Sprintf("--goto=%s:%d", pathArg, lineNumber))
+				cmd = append(cmd, "--goto", fmt.Sprintf("%s:%d", pathArg, lineNumber))
 			}
 		}
 
